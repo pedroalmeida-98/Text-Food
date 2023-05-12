@@ -1,0 +1,177 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://textures/BGTilePlaceholder.jpg" type="Texture" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=4]
+[ext_resource path="res://font/HyningsHandwritingV2-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://EnemyContainer.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16.6658, 168.966 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 33
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 5 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -11.3821
+margin_top = -36.7453
+margin_right = 1088.62
+margin_bottom = 624.255
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseArea"]
+position = Vector2( 1076.84, 169.037 )
+shape = SubResource( 2 )
+
+[node name="SpawContainer" type="Node2D" parent="."]
+position = Vector2( 14.2928, 47.7693 )
+
+[node name="Position2D" type="Position2D" parent="SpawContainer"]
+position = Vector2( -2.15848, 3.40977 )
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+position = Vector2( -2.87024, 2.05474 )
+script = ExtResource( 6 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverScreen" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+margin_right = 1080.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GameOverScreen"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1073.0
+margin_bottom = 593.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOverScreen/CenterContainer"]
+margin_left = 450.0
+margin_top = 249.0
+margin_right = 615.0
+margin_bottom = 336.0
+custom_constants/separation = 25
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverScreen/CenterContainer/VBoxContainer"]
+margin_right = 165.0
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 3 )
+text = "You are fired!"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/GameOverScreen/CenterContainer/VBoxContainer"]
+margin_top = 62.0
+margin_right = 165.0
+margin_bottom = 87.0
+custom_fonts/font = SubResource( 4 )
+text = "Restart"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+margin_top = 531.809
+margin_right = 324.0
+margin_bottom = 572.809
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_right = 512.0
+
+[node name="MidRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 512.0
+margin_bottom = 4.0
+size_flags_vertical = 3
+
+[node name="BottomRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 512.0
+margin_bottom = 41.0
+
+[node name="DiffContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
+margin_right = 124.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DifficultyLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/DiffContainer"]
+margin_right = 108.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 1 )
+text = " Difficulty"
+
+[node name="DifficultyValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/DiffContainer"]
+margin_left = 112.0
+margin_right = 124.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
+margin_left = 128.0
+margin_right = 308.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 49.55
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/VBoxContainer"]
+margin_right = 180.0
+margin_bottom = 14.0
+text = "                                             "
+align = 1
+
+[node name="EnemyContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
+margin_left = 312.0
+margin_right = 512.0
+margin_bottom = 33.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemiesKilledLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/EnemyContainer"]
+margin_right = 184.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 1 )
+text = "Orders Delivered:"
+
+[node name="EnemiesKilledValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/EnemyContainer"]
+margin_left = 188.0
+margin_right = 200.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+[connection signal="body_entered" from="LoseArea" to="." method="_on_LoseArea_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
+[connection signal="pressed" from="CanvasLayer/GameOverScreen/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
